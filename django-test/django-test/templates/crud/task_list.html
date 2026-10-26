@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><title>Задачи</title></head>
+<body>
+    <h1>Список задач</h1>
+    <a href="{% url 'crud:task_create' %}">Создать задачу</a>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <a href="{% url 'crud:task_detail' task.id %}">{{ task.title }}</a>
+            {% if task.is_done %}(выполнено){% endif %}
+        </li>
+        {% empty %}
+        <li>Задач пока нет</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

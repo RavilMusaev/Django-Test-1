@@ -16,7 +16,6 @@ class BlogTests(TestCase):
             author='Тестовый Автор',
         )
 
-    # ---------- Модель ----------
     def test_blog_model_creation(self):
         self.assertEqual(self.blog.title, 'Тестовый заголовок')
         self.assertEqual(self.blog.author, 'Тестовый Автор')
@@ -25,7 +24,6 @@ class BlogTests(TestCase):
     def test_new_blog_has_zero_likes(self):
         self.assertEqual(self.blog.likes, 0)
 
-    # ---------- List ----------
     def test_blog_list_view(self):
         response = self.client.get(reverse('blog_list'))
 
@@ -66,7 +64,6 @@ class BlogTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    # ---------- Detail ----------
     def test_blog_detail_view(self):
         response = self.client.get(reverse('blog_detail', args=[self.blog.id]))
 
@@ -108,7 +105,6 @@ class BlogTests(TestCase):
 
         self.assertContains(response, 'Ivanov Ivan (Главный редактор)')
 
-    # ---------- Лайки / просмотры ----------
     def test_likes_increase_on_detail_view(self):
         self.client.get(reverse('blog_detail', args=[self.blog.id]))
         self.blog.refresh_from_db()
